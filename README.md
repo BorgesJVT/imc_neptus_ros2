@@ -13,7 +13,7 @@ Minimal library for bridging ROS2 and IMC messages. In this way, the exchange of
 - Clone the repositories and compile them:
 ```
 $ source /opt/ros/galactic/setup.bash
-$ git clone git@gitlab.marum.de:MUtTI/imc_neptus_ros2.git
+$ git clone https://github.com/paagutie/imc_neptus_ros2.git
 $ cd imc_neptus_ros2
 $ colcon build
 ```
