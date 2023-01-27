@@ -13,7 +13,7 @@
 
 #include <imc_ros_bridge/ros_to_imc/EstimatedState.h>
 #include <tf2/LinearMath/Quaternion.h>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <geometry_msgs/msg/quaternion.hpp>
 
 namespace ros_to_imc {
