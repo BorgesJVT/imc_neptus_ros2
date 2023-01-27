@@ -22,6 +22,8 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(bridge_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
 
 
@@ -88,6 +90,8 @@ ament_target_dependencies(bridge_node rclcpp
     "sensor_msgs" 
     "geometry_msgs"
     "bridge_msgs"
+    "tf2"
+    "tf2_geometry_msgs"
 )
 
 target_link_libraries(bridge_node md5 imc_factory)
