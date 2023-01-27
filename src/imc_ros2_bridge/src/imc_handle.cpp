@@ -105,7 +105,7 @@ void IMCHandle::announce()
 
     //TEST Publish EntityInfo
     IMC::EntityInfo info_msg;
-    //info_msg.id = udp_link.imc_src; //What is this used for?
+    info_msg.id = imc_src; //What is this used for?
     info_msg.label = sys_name;
     udp_link.publish(info_msg, neptus_addr);
 }
