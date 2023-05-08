@@ -16,7 +16,7 @@
 namespace ros_to_imc {
 
 template <>
-bool convert(const bridge_msgs::msg::RemoteState& ros_msg, IMC::RemoteState& imc_msg)
+bool convert(const neptus_msgs::msg::RemoteState& ros_msg, IMC::RemoteState& imc_msg)
 {
     imc_msg.lat = ros_msg.lat;
     imc_msg.lon = ros_msg.lon;

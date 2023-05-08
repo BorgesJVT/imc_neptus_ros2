@@ -18,7 +18,7 @@
 // #include <std_msgs/String.h>
 #include <IMC/Spec/PlanDB.hpp>
 
-#include "bridge_msgs/msg/plan_db.hpp"
+#include "neptus_msgs/msg/plan_db.hpp"
 
 
 namespace imc_to_ros {
@@ -28,7 +28,7 @@ namespace imc_to_ros {
 //
 
 template <>
-bool convert(const IMC::PlanDB& imc_msg, bridge_msgs::msg::PlanDB& ros_msg);
+bool convert(const IMC::PlanDB& imc_msg, neptus_msgs::msg::PlanDB& ros_msg);
 
 
 } // namespace imc_to_ros

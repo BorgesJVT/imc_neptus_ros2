@@ -8,10 +8,10 @@
 #include "std_msgs/msg/string.hpp"
 #include "std_msgs/msg/empty.hpp"
 #include <geometry_msgs/msg/pose.hpp>
-#include <bridge_msgs/msg/plan_db.hpp>
-#include <bridge_msgs/msg/plan_control.hpp>
-#include <bridge_msgs/msg/remote_state.hpp>
-#include <bridge_msgs/msg/estimated_state.hpp>
+#include <neptus_msgs/msg/plan_db.hpp>
+#include <neptus_msgs/msg/plan_control.hpp>
+#include <neptus_msgs/msg/remote_state.hpp>
+#include <neptus_msgs/msg/estimated_state.hpp>
 #include <sensor_msgs/msg/nav_sat_fix.hpp>
 
 #include <iostream>
@@ -53,11 +53,11 @@ int main(int argc, char * argv[])
 
   ros_to_imc::BridgeServer<std_msgs::msg::Empty, IMC::Heartbeat> heartbeat_server(node, imc_handle, "heartbeat");
   ros_to_imc::BridgeServer<geometry_msgs::msg::Pose, IMC::Goto> goto_server_dummy(node, imc_handle, "goto_input");
-  ros_to_imc::BridgeServer<bridge_msgs::msg::RemoteState, IMC::RemoteState> RemoteState_server(node, imc_handle, "remote_state");
+  ros_to_imc::BridgeServer<neptus_msgs::msg::RemoteState, IMC::RemoteState> RemoteState_server(node, imc_handle, "remote_state");
   ros_to_imc::BridgeServer<sensor_msgs::msg::NavSatFix, IMC::GpsFix> gpsfix_server(node, imc_handle, "gps_fix");
   ros_to_imc::BridgeServer<sensor_msgs::msg::NavSatFix, IMC::GpsNavData> gpsnavdata_server(node, imc_handle, "gps_nav_data");
   //EstimatedState for continous updates of location!
-  ros_to_imc::BridgeServer<bridge_msgs::msg::EstimatedState, IMC::EstimatedState> estimatedstate_server(node, imc_handle, "estimated_state");
+  ros_to_imc::BridgeServer<neptus_msgs::msg::EstimatedState, IMC::EstimatedState> estimatedstate_server(node, imc_handle, "estimated_state");
 
   //150
   imc_to_ros::BridgeServer<IMC::Heartbeat, std_msgs::msg::Empty> imc_heartbeat_server(imc_handle, node, "imc_heartbeat");
@@ -66,9 +66,9 @@ int main(int argc, char * argv[])
   //450
   imc_to_ros::BridgeServer<IMC::Goto, geometry_msgs::msg::Pose> goto_server(imc_handle, node, "goto_waypoint");
   //556
-  imc_to_ros::BridgeServer<IMC::PlanDB, bridge_msgs::msg::PlanDB> plandb_server(imc_handle, node, "plan_db");
+  imc_to_ros::BridgeServer<IMC::PlanDB, neptus_msgs::msg::PlanDB> plandb_server(imc_handle, node, "plan_db");
   //559
-  imc_to_ros::BridgeServer<IMC::PlanControl, bridge_msgs::msg::PlanControl> plancontrol_server(imc_handle, node, "plan_control");
+  imc_to_ros::BridgeServer<IMC::PlanControl, neptus_msgs::msg::PlanControl> plancontrol_server(imc_handle, node, "plan_control");
 
         
   rclcpp::spin(node);

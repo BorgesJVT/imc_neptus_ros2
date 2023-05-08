@@ -15,9 +15,9 @@
 #include <md5.h>
 
 #include <imc_ros_bridge/imc_to_ros/PlanDB.h>
-#include <bridge_msgs/msg/plan_specification.hpp>
-#include <bridge_msgs/msg/plan_maneuver.hpp>
-#include <bridge_msgs/msg/polygon_vertex.hpp>
+#include <neptus_msgs/msg/plan_specification.hpp>
+#include <neptus_msgs/msg/plan_maneuver.hpp>
+#include <neptus_msgs/msg/polygon_vertex.hpp>
 
 #include <IMC/Base/InlineMessage.hpp>
 #include <IMC/Base/Message.hpp>
@@ -34,7 +34,7 @@
 namespace imc_to_ros {
 
 template <>
-bool convert(const IMC::PlanDB& imc_msg, bridge_msgs::msg::PlanDB& ros_msg)
+bool convert(const IMC::PlanDB& imc_msg, neptus_msgs::msg::PlanDB& ros_msg)
 {
 	ros_msg.type = imc_msg.type;
 	ros_msg.op = imc_msg.op;
@@ -50,7 +50,7 @@ bool convert(const IMC::PlanDB& imc_msg, bridge_msgs::msg::PlanDB& ros_msg)
 
 		// 551 is PlanSpecification
 		if(arg_msg_id == 551){
-			ros_msg.plan_spec = bridge_msgs::msg::PlanSpecification();
+			ros_msg.plan_spec = neptus_msgs::msg::PlanSpecification();
 			// cast it to its proper type finally
 			// arg.get() returns a Message*, cast that pointer to a pointer to a PlanSpec because we KNOW
 			// it is actually pointing to a real PlanSpec object, thanks to the id of the message.
@@ -108,12 +108,12 @@ bool convert(const IMC::PlanDB& imc_msg, bridge_msgs::msg::PlanDB& ros_msg)
 			// can we reach this now?
 			IMC::MessageList<IMC::PlanManeuver> plan_man_list = plan_spec->maneuvers;
 			// i gotta make it into an array before i set it into the ros msg later.
-			std::list<bridge_msgs::msg::PlanManeuver> maneuvers = std::list<bridge_msgs::msg::PlanManeuver>();
+			std::list<neptus_msgs::msg::PlanManeuver> maneuvers = std::list<neptus_msgs::msg::PlanManeuver>();
 			// fill in the list from the imc message
 			for(IMC::PlanManeuver* pm : plan_man_list){
-				bridge_msgs::msg::PlanManeuver plan_maneuver = bridge_msgs::msg::PlanManeuver();
+				neptus_msgs::msg::PlanManeuver plan_maneuver = neptus_msgs::msg::PlanManeuver();
 				plan_maneuver.maneuver_id = pm->maneuver_id;
-				plan_maneuver.maneuver = bridge_msgs::msg::Maneuver();
+				plan_maneuver.maneuver = neptus_msgs::msg::Maneuver();
 
 				IMC::InlineMessage<IMC::Maneuver> pm_data = pm->data;
 				// another friggin inline message...
@@ -182,7 +182,7 @@ bool convert(const IMC::PlanDB& imc_msg, bridge_msgs::msg::PlanDB& ros_msg)
 
 						// ros_msg.polygon = imc_msg.polygon
 						for(IMC::PolygonVertex* imc_pv : cover_area->polygon){
-							auto ros_pv = bridge_msgs::msg::PolygonVertex();
+							auto ros_pv = neptus_msgs::msg::PolygonVertex();
 							ros_pv.lat = imc_pv->lat;
 							ros_pv.lon = imc_pv->lon;
 							plan_maneuver.maneuver.polygon.push_back(ros_pv);
@@ -200,7 +200,7 @@ bool convert(const IMC::PlanDB& imc_msg, bridge_msgs::msg::PlanDB& ros_msg)
 			// and assign to ros message, finally.
 			ros_msg.plan_spec.maneuvers.resize(maneuvers.size());
 			int i=0;
-			for(bridge_msgs::msg::PlanManeuver const &pm: maneuvers){
+			for(neptus_msgs::msg::PlanManeuver const &pm: maneuvers){
 				ros_msg.plan_spec.maneuvers[i++] = pm;
 			}
 

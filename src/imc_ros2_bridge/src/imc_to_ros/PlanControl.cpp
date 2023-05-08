@@ -16,7 +16,7 @@
 namespace imc_to_ros {
 
 template <>
-bool convert(const IMC::PlanControl& imc_msg, bridge_msgs::msg::PlanControl& ros_msg)
+bool convert(const IMC::PlanControl& imc_msg, neptus_msgs::msg::PlanControl& ros_msg)
 {
     ros_msg.type = imc_msg.type;
     ros_msg.op = imc_msg.op;

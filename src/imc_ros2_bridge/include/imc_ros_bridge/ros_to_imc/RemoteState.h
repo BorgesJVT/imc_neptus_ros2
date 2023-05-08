@@ -15,13 +15,13 @@
 #define ROS_TO_IMC_REMOTESTATE_H
 
 #include <imc_ros_bridge/imc_ros_bridge_server.h>
-#include <bridge_msgs/msg/remote_state.hpp>
+#include <neptus_msgs/msg/remote_state.hpp>
 #include <IMC/Spec/RemoteState.hpp>
 
 namespace ros_to_imc {
 
 template <>
-bool convert(const bridge_msgs::msg::RemoteState& ros_msg, IMC::RemoteState& imc_msg);
+bool convert(const neptus_msgs::msg::RemoteState& ros_msg, IMC::RemoteState& imc_msg);
 
 } // namespace ros_to_imc
 #endif // ROS_TO_IMC_REMOTESTATE_H

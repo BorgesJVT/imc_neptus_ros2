@@ -15,13 +15,13 @@
 #define IMC_TO_ROS_PLANCONTROL_H
 
 #include <imc_ros_bridge/imc_ros_bridge_server.h>
-#include <bridge_msgs/msg/plan_control.hpp>
+#include <neptus_msgs/msg/plan_control.hpp>
 #include <IMC/Spec/PlanControl.hpp>
 
 namespace imc_to_ros {
 
 template <>
-bool convert(const IMC::PlanControl& imc_msg, bridge_msgs::msg::PlanControl& ros_msg);
+bool convert(const IMC::PlanControl& imc_msg, neptus_msgs::msg::PlanControl& ros_msg);
 
 } // namespace imc_to_ros
 
