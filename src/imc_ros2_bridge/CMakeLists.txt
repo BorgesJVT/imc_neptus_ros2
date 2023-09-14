@@ -55,8 +55,8 @@ file(GLOB SOURCE_FILES
 )
 
 
-add_executable(bridge_node src/bridge_node.cpp ${SOURCE_FILES})
-ament_target_dependencies(bridge_node rclcpp
+add_executable(vehicle_node src/vehicle_node.cpp ${SOURCE_FILES})
+ament_target_dependencies(vehicle_node rclcpp
     "sensor_msgs" 
     "geometry_msgs"
     "neptus_msgs"
@@ -64,12 +64,34 @@ ament_target_dependencies(bridge_node rclcpp
     "tf2_geometry_msgs"
 )
 
-target_link_libraries(bridge_node md5 imc_factory)
+add_executable(vessel_node src/vessel_node.cpp ${SOURCE_FILES})
+ament_target_dependencies(vessel_node rclcpp
+    "sensor_msgs" 
+    "geometry_msgs"
+    "neptus_msgs"
+    "tf2"
+    "tf2_geometry_msgs"
+)
+
+add_executable(transponder_node src/transponder_node.cpp ${SOURCE_FILES})
+ament_target_dependencies(transponder_node rclcpp
+    "sensor_msgs" 
+    "geometry_msgs"
+    "neptus_msgs"
+    "tf2"
+    "tf2_geometry_msgs"
+)
+
+target_link_libraries(vehicle_node md5 imc_factory)
+target_link_libraries(vessel_node md5 imc_factory)
+target_link_libraries(transponder_node md5 imc_factory)
 
 
 #Install C++ targets
 install(TARGETS
-  bridge_node
+  vehicle_node
+  vessel_node
+  transponder_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
