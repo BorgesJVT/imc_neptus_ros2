@@ -56,7 +56,11 @@ UDPLink::UDPLink(std::function<void (IMC::Message*)> recv_handler,
                     const int& bridge_port,
                     int imc_id, 
                     int imc_src)
-: recv_handler_(recv_handler)
+: bridge_addr(bridge_addr),
+bridge_port(bridge_port),
+recv_handler_(recv_handler),
+imc_id(imc_id),
+imc_src(imc_src)
 {
     //std::string neptus_adddress = "224.0.75.69";
     //const char *address = neptus_adddress.c_str();
