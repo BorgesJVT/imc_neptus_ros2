@@ -71,7 +71,7 @@ UDPLink::UDPLink(std::function<void (IMC::Message*)> recv_handler,
     // zero out the structure
     memset((char *) &si_me, 0, sizeof(si_me));
     si_me.sin_family = AF_INET;
-    si_me.sin_port = htons(6002);
+    si_me.sin_port = htons(bridge_port);
     si_me.sin_addr.s_addr = htonl(INADDR_ANY);//inet_addr("224.0.75.69");//htonl(INADDR_ANY); //inet_addr("224.0.75.69");
     
     //int set_option_on = 1;
@@ -121,8 +121,8 @@ void UDPLink::handle_receive()
 //announce
 void UDPLink::publish_multicast(IMC::Message& msg, const std::string& multicast_addr)
 {
-    msg.setSource(04); //imc_src
-    msg.setSourceEntity(30); //imc_id
+    msg.setSource(imc_src);
+    msg.setSourceEntity(imc_id);
     msg.setDestination(0);
     msg.setTimeStamp(rclcpp::Clock().now().seconds());
     
@@ -147,8 +147,8 @@ void UDPLink::publish_multicast(IMC::Message& msg, const std::string& multicast_
 //heartbeat
 void UDPLink::publish(IMC::Message& msg, const std::string& address)
 {
-   msg.setSource(04); //imc_src
-   msg.setSourceEntity(30); //imc_id
+   msg.setSource(imc_src);
+   msg.setSourceEntity(imc_id);
    msg.setDestination(0);
    msg.setTimeStamp(rclcpp::Clock().now().seconds());
     
