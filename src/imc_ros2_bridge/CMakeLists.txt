@@ -97,7 +97,7 @@ install(TARGETS
 
 
 #Install Launch file
-#install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 
 ament_package()
 
