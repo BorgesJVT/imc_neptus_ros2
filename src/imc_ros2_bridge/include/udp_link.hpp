@@ -44,9 +44,9 @@ private:
     int bridge_port;
     std::function<void (IMC::Message*)> recv_handler_;
     IMC::Parser parser_;
-    int imc_src = 4;
-    int imc_src_ent = 30;
-	int imc_id = 30;
+    int imc_id;
+    int imc_src;
+    int imc_src_ent;
     
     //socket
     int s;
