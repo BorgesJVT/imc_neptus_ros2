@@ -37,17 +37,19 @@
 
 int main(int argc, char * argv[])
 {
-  std::string bridge_addr = "127.0.0.1";
-  std::string sys_name = "imc_ros2_bridge";
-  std::string neptus_addr = "127.0.0.1";
   int bridge_port = 6002;
   int imc_src = 4;
-  //int imc_src_ent = 30;
   int imc_id = 30;
   
   rclcpp::init(argc, argv);
-  //auto node = std::make_shared<BridgeNode>(&imc_handle);
-  auto node = rclcpp::Node::make_shared("bridge_node");
+  auto node = rclcpp::Node::make_shared("bridge_node",
+                                        rclcpp::NodeOptions()
+                                            .allow_undeclared_parameters(true)
+                                            .automatically_declare_parameters_from_overrides(true));
+  
+  std::string bridge_addr = node->get_parameter("bridge_address").as_string();
+  std::string neptus_addr = node->get_parameter("neptus_address").as_string();
+  std::string sys_name = node->get_parameter("sys_name").as_string();
   
   IMCHandle imc_handle(node, bridge_addr, bridge_port, neptus_addr, sys_name, imc_id, imc_src);
 
