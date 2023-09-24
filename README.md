@@ -46,6 +46,7 @@ $ ros2 topic pub /estimated_state bridge_msgs/msg/EstimatedState "{lat: 0.926950
 
 #### Neptus
 ```
+$ git clone -b miniROV https://github.com/paagutie/neptus.git
 $ cd neptus
 $ ./gradlew clean && ./gradlew && ./gradlew run
 ```
