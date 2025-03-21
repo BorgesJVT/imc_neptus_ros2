@@ -16,7 +16,7 @@
 namespace ros_to_imc {
 
 template <>
-bool convert(const imc_ros_bridge::VehicleState& ros_msg, IMC::VehicleState& imc_msg)
+bool convert(const neptus_msgs::msg::VehicleState& ros_msg, IMC::VehicleState& imc_msg)
 {
     imc_msg.op_mode = ros_msg.op_mode;
     imc_msg.error_count = ros_msg.error_count;

@@ -12,6 +12,7 @@
 #include <neptus_msgs/msg/plan_control.hpp>
 #include <neptus_msgs/msg/remote_state.hpp>
 #include <neptus_msgs/msg/estimated_state.hpp>
+#include <neptus_msgs/msg/vehicle_state.hpp>
 #include <sensor_msgs/msg/nav_sat_fix.hpp>
 
 #include <iostream>
@@ -32,6 +33,7 @@
 #include <imc_ros_bridge/ros_to_imc/GpsFix.h>
 #include <imc_ros_bridge/ros_to_imc/GpsNavData.h>
 #include <imc_ros_bridge/ros_to_imc/EstimatedState.h>
+#include <imc_ros_bridge/ros_to_imc/VehicleState.h>
 
 
 
@@ -60,6 +62,8 @@ int main(int argc, char * argv[])
   ros_to_imc::BridgeServer<sensor_msgs::msg::NavSatFix, IMC::GpsNavData> gpsnavdata_server(node, imc_handle, "gps_nav_data");
   //EstimatedState for continous updates of location!
   ros_to_imc::BridgeServer<neptus_msgs::msg::EstimatedState, IMC::EstimatedState> estimatedstate_server(node, imc_handle, "estimated_state");
+  ros_to_imc::BridgeServer<neptus_msgs::msg::VehicleState, IMC::VehicleState> vehicle_supervisor(node, imc_handle, "vehicle_state");
+  //ros_to_imc::BridgeServer<neptus_msgs::msg::VehicleState, IMC::VehicleState> vehicle_supervisor(node, imc_handle, "vehicle_state");
 
   //150
   imc_to_ros::BridgeServer<IMC::Heartbeat, std_msgs::msg::Empty> imc_heartbeat_server(imc_handle, node, "imc_heartbeat");
@@ -71,7 +75,6 @@ int main(int argc, char * argv[])
   imc_to_ros::BridgeServer<IMC::PlanDB, neptus_msgs::msg::PlanDB> plandb_server(imc_handle, node, "plan_db");
   //559
   imc_to_ros::BridgeServer<IMC::PlanControl, neptus_msgs::msg::PlanControl> plancontrol_server(imc_handle, node, "plan_control");
-
         
   rclcpp::spin(node);
   rclcpp::shutdown();

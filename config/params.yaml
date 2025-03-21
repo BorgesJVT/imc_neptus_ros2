@@ -1,17 +1,17 @@
 vehicle_node:
   ros__parameters:
-    bridge_address: "192.168.2.183"
-    neptus_address: "192.168.2.183"
+    bridge_address: "10.7.113.149"
+    neptus_address: "10.7.113.149"
     sys_name: "MiniROV"
 
 vessel_node:
   ros__parameters:
-    bridge_address: "192.168.2.90"
-    neptus_address: "192.168.2.183"
+    bridge_address: "10.7.113.149"
+    neptus_address: "10.7.113.149"
     sys_name: "FS Heincke"
     
 transponder_node:
   ros__parameters:
-    bridge_address: "192.168.2.197"
-    neptus_address: "192.168.2.183"
+    bridge_address: "10.7.113.149"
+    neptus_address: "10.7.113.149"
     sys_name: "Transponder1"

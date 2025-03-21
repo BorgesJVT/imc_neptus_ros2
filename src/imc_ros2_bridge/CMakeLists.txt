@@ -52,8 +52,8 @@ file(GLOB SOURCE_FILES
  src/ros_to_imc/GpsFix.cpp
  src/ros_to_imc/GpsNavData.cpp
  src/ros_to_imc/EstimatedState.cpp
+ src/ros_to_imc/VehicleState.cpp
 )
-
 
 add_executable(vehicle_node src/vehicle_node.cpp ${SOURCE_FILES})
 ament_target_dependencies(vehicle_node rclcpp
@@ -82,16 +82,50 @@ ament_target_dependencies(transponder_node rclcpp
     "tf2_geometry_msgs"
 )
 
+add_executable(vehicle_supervisor_node src/vehicle_supervisor_node.cpp ${SOURCE_FILES})
+ament_target_dependencies(vehicle_supervisor_node rclcpp
+    "sensor_msgs" 
+    "geometry_msgs"
+    "neptus_msgs"
+    "tf2"
+    "tf2_geometry_msgs"
+)
+
+add_executable(monitors_node src/monitors_node.cpp ${SOURCE_FILES})
+ament_target_dependencies(monitors_node rclcpp
+    "sensor_msgs" 
+    "geometry_msgs"
+    "neptus_msgs"
+    "tf2"
+    "tf2_geometry_msgs"
+)
+
+add_executable(odometry_to_estimated_state_node 
+  src/odometry_to_estimated_state_node.cpp ${SOURCE_FILES}
+)
+ament_target_dependencies(odometry_to_estimated_state_node rclcpp
+    "sensor_msgs" 
+    "geometry_msgs"
+    "neptus_msgs"
+    "tf2"
+    "tf2_geometry_msgs"
+)
+
 target_link_libraries(vehicle_node md5 imc_factory)
 target_link_libraries(vessel_node md5 imc_factory)
 target_link_libraries(transponder_node md5 imc_factory)
-
+target_link_libraries(vehicle_supervisor_node md5 imc_factory)
+target_link_libraries(monitors_node md5 imc_factory)
+target_link_libraries(odometry_to_estimated_state_node md5 imc_factory)
 
 #Install C++ targets
 install(TARGETS
   vehicle_node
   vessel_node
   transponder_node
+  vehicle_supervisor_node
+  monitors_node
+  odometry_to_estimated_state_node
   DESTINATION lib/${PROJECT_NAME}
 )
 

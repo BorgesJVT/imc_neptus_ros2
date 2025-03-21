@@ -15,13 +15,13 @@
 #define ROS_TO_IMC_VEHICLESTATE_H
 
 #include <imc_ros_bridge/imc_ros_bridge_server.h>
-#include "imc_ros_bridge/VehicleState.h"
+#include <neptus_msgs/msg/vehicle_state.hpp>
 #include <IMC/Spec/VehicleState.hpp>
 
 namespace ros_to_imc {
 
 template <>
-bool convert(const imc_ros_bridge::VehicleState& ros_msg, IMC::VehicleState& imc_msg);
+bool convert(const neptus_msgs::msg::VehicleState& ros_msg, IMC::VehicleState& imc_msg);
 
 } // namespace ros_to_imc
 #endif // ROS_TO_IMC_VEHICLESTATE_H
