@@ -96,8 +96,8 @@ void IMCHandle::announce()
     // dont put location info here, this is only updated once
     // use EstimatedState for continous updates of location.
     //lat +=0.01;
-    msg.lat = 0.71881385;
-    msg.lon = -0.15195186;
+    msg.lat = -0.40174237833249615; // -0.39840630835274565;
+    msg.lon = -0.773666187225512; // -0.7535904104444776;
     //msg.height = -1.;
     //msg.services = "imc+info://0.0.0.0/version/5.4.11/;imc+udp://127.0.0.1:6002/;";
     msg.services = "imc+udp://" + bridge_addr + ":" + std::to_string(bridge_port) + "/;";
