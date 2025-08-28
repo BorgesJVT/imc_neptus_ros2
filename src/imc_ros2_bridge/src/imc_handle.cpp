@@ -29,7 +29,9 @@ IMCHandle::IMCHandle(rclcpp::Node::SharedPtr ros_node,
                      const std::string& bridge_addr, 
 					 const int& bridge_port,
                      const std::string& neptus_addr,
-                     const std::string& sys_name, 
+                     const std::string& sys_name,
+                     const double initial_lat,
+                     const double initial_long,
 					 int imc_id, 
 					 int imc_src)
     : node(ros_node),
@@ -41,6 +43,9 @@ IMCHandle::IMCHandle(rclcpp::Node::SharedPtr ros_node,
 {
     lat = 0.0;
     udp_link.start();
+
+    initial_latitude = initial_lat;
+    initial_longitude = initial_long;
 
     timer_announce = node->create_wall_timer(std::chrono::seconds(10), std::bind(&IMCHandle::announce, this));
     timer_heartbeat = node->create_wall_timer(std::chrono::milliseconds(1000), std::bind(&IMCHandle::publish_heartbeat, this));
@@ -96,8 +101,8 @@ void IMCHandle::announce()
     // dont put location info here, this is only updated once
     // use EstimatedState for continous updates of location.
     //lat +=0.01;
-    msg.lat = -0.40174237833249615; // -0.39840630835274565;
-    msg.lon = -0.773666187225512; // -0.7535904104444776;
+    msg.lat = initial_latitude; // -0.40174237833249615; // -0.39840630835274565;
+    msg.lon = initial_longitude; // -0.773666187225512; // -0.7535904104444776;
     //msg.height = -1.;
     //msg.services = "imc+info://0.0.0.0/version/5.4.11/;imc+udp://127.0.0.1:6002/;";
     msg.services = "imc+udp://" + bridge_addr + ":" + std::to_string(bridge_port) + "/;";

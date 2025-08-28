@@ -26,6 +26,8 @@ private:
     int bridge_port;
     std::string neptus_addr;
     std::string sys_name;
+    float initial_latitude;
+    float initial_longitude;
     int imc_id;
 	int imc_src;
     
@@ -43,7 +45,9 @@ public:
               const std::string& bridge_addr, 
               const int& bridge_port,
               const std::string& neptus_addr,
-              const std::string& sys_name, 
+              const std::string& sys_name,
+              const double initial_lat,
+              const double initial_long,
               int imc_id, 
               int imc_src);
 

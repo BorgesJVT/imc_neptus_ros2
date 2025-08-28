@@ -16,7 +16,7 @@
 namespace ros_to_imc {
 
 template <>
-bool convert(const imc_ros_bridge::PlanControlState& ros_msg, IMC::PlanControlState& imc_msg)
+bool convert(const neptus_msgs::msg::PlanControlState& ros_msg, IMC::PlanControlState& imc_msg)
 {
     imc_msg.state = ros_msg.state;
     imc_msg.plan_id = ros_msg.plan_id;
